@@ -1,0 +1,27 @@
+pkgname=fetch-areofyl
+pkgver=1.0
+pkgrel=1
+pkgdesc="donut.c + fastfetch = fetch-areofyl"
+arch=('x86_64')
+url="https://github.com/areofyl/fetch"
+license=('ISC')
+depends=('glibc')
+makedepends=('git')
+
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd fetch
+    cat VERSION
+}
+
+build() {
+    cd fetch
+    make
+}
+
+package() {
+    cd fetch
+    make PREFIX="$pkgdir/usr" install
+}
